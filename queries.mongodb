@@ -1,0 +1,15 @@
+show databases;
+
+use guvi;
+
+show collections;
+
+db.dropDatabase();
+
+db.collection.drop();
+
+db.collection.remove();
+
+db.createCollection("Collection_name");
+
+db.tablename.find();
