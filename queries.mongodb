@@ -1,3 +1,5 @@
+#Mongodb queries
+
 show databases;
 
 use guvi;
@@ -13,3 +15,49 @@ db.collection.remove();
 db.createCollection("Collection_name");
 
 db.tablename.find();
+
+db.tablename.find({"Column_name":"value"}{"required_column":1,"not_required_column":0});--1 is yes and 0 is no
+
+db.tablename.find().sort({"name":1});-- 1 is ascending
+
+db.tablename.find().sort({"age":-1});-- -1 is descending
+
+db.tablename.find().limit(2);
+
+db.tablename.find().skip(2).limit(2);
+
+db.tablename.find().sort({"age":-1}).skip(1).limit(1);
+
+db.tablename.find({"age":{$gt 21});
+
+db.employee.insertOne({});
+
+db.employee.insertMany([{},{}]);
+
+db.emoployee.deleteOne({"name":"Dilip"});
+
+db.employee.deleteMany({});
+
+db.employee.updateOne({"name":"Dilip"},{$set:{"age":21}});
+
+db.employee.updateMany({});
+
+db.employee.find({"name":{$in:["Dilip","Charu"]}})
+
+db.employee.find({$and:[{"age":{$gt:20}},{"age":{$lt:24}}]})
+
+db.employee.find({$or:[{"name":"Dilip"},{"name":"Kumar"}]})
+
+db.employee.aggregate({$group: {_id:"age",count:{$sum:1}}})
+
+db.employee.aggregate([{$match:{"age":{$gt:21}}},{$project:{"name":1,"age":1,"_id":0}}])
+
+db.employee.renameCollection("emp");
+
+db.emp.updateMany({},{"DOB":"dob"})
+
+db.emp.aggregate({$group:{"_id":"age","count":{$sum:1}}},{$project:{"count":1,"age":1}})
+
+db.emp.aggregate({$group:{"_id":"age","arpush":{$push:"$age"},"arrset":{$addToSet:"$age"}}})
+
+db.emp.aggregate({$sort:{"age":1}},{$skip:1},{$limit:3})
